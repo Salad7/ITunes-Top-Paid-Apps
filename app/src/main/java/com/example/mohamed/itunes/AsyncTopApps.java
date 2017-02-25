@@ -5,6 +5,8 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ProgressBar;
 
+import org.json.JSONException;
+
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -36,8 +38,12 @@ public class AsyncTopApps extends AsyncTask<String, Void, ArrayList<App>> {
             while ((line = reader.readLine()) != null ) {
                 sb.append(line);
             }
+            try {
+                return AppUtils.JSonParser.parseData(sb.toString());
+            }
+            catch (JSONException d){
 
-            return DataUtil.DataJSONParser.parseData(sb.toString());
+            }
         } catch (MalformedURLException e) {
             e.printStackTrace();
         } catch (IOException e) {
