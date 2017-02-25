@@ -17,7 +17,7 @@ public class MainActivity extends AppCompatActivity implements AsyncTopApps.IDat
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = (ListView) findViewById(R.id.list);
-        new AsyncTopApps(MainActivity.this, this).execute("");
+        new AsyncTopApps(this).execute("");
 
 
 

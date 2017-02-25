@@ -5,6 +5,12 @@ import android.content.Context;
 import android.os.AsyncTask;
 import android.widget.ProgressBar;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.ArrayList;
 
 /**
@@ -14,16 +20,45 @@ import java.util.ArrayList;
 public class AsyncTopApps extends AsyncTask<String, Void, ArrayList<App>> {
 
     ProgressBar pb;
-    IData interfaceIData;
     MainActivity activity;
     @Override
     protected ArrayList<App> doInBackground(String... strings) {
+
+        BufferedReader reader = null;
+
+        try {
+            URL url = new URL(strings[0]);
+            HttpURLConnection con = (HttpURLConnection) url.openConnection();
+            con.setRequestMethod("GET");
+            reader = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            StringBuilder sb = new StringBuilder();
+            String line = "";
+            while ((line = reader.readLine()) != null ) {
+                sb.append(line);
+            }
+
+            return DataUtil.DataJSONParser.parseData(sb.toString());
+        } catch (MalformedURLException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        } finally {
+            try {
+                if (reader != null) {
+                    reader.close();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+
+
         return null;
     }
 
-    AsyncTopApps(MainActivity mainActivity, IData d){
+    AsyncTopApps(MainActivity mainActivity){
         activity = mainActivity;
-        interfaceIData = d;
+        //interfaceIData = d;
     }
 
     @Override
