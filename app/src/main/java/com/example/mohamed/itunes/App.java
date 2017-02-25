@@ -8,6 +8,15 @@ public class App {
     String thumbnail;
     String name;
     boolean isFavorite;
+    String price;
+
+    public String getPrice() {
+        return price;
+    }
+
+    public void setPrice(String price) {
+        this.price = price;
+    }
 
     public String getThumbnail() {
         return thumbnail;

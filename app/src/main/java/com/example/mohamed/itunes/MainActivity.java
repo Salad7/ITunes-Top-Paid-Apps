@@ -10,14 +10,15 @@ import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity implements AsyncTopApps.IData{
     ListView listView;
-    final ProgressDialog progressDialog = new ProgressDialog(this);
+   ProgressDialog progressDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         listView = (ListView) findViewById(R.id.list);
-        new AsyncTopApps(this).execute("");
+        //progressDialog = new ProgressDialog(this);
+        new AsyncTopApps(this).execute("https://itunes.apple.com/us/rss/toppaidapplications/limit=25/json");
 
 
 
@@ -27,5 +28,7 @@ public class MainActivity extends AppCompatActivity implements AsyncTopApps.IDat
     @Override
     public void sendData(ArrayList<App> a) {
         //Data will be sent here
+
+
     }
 }
