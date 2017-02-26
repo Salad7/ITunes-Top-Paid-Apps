@@ -18,13 +18,14 @@ public class AppUtils {
     public static class JSonParser {
      static ArrayList<App> parseData(String link) throws JSONException{
          ArrayList<App> appList = new ArrayList<>();
+         App application;
          JSONObject root = new JSONObject(link); //Capture the outer braces which is a JSON object
          JSONObject dataJSonObject = root.getJSONObject("feed"); //Capture feed which is an object
          JSONArray apps = dataJSonObject.getJSONArray("entry"); //Capture entry which is an array
 
          //For each object we have
          for (int i = 0; i < apps.length(); i++) {
-                App application = new App();
+                application = new App();
 
                 //Grab each json object inside of entry
                 JSONObject app = apps.getJSONObject(i);
@@ -35,15 +36,17 @@ public class AppUtils {
              JSONObject priceObj= app.getJSONObject("im:price");
 
 
-             //Log.d("JSONObject @string rets",obj.getString("label")); //Works
+             Log.d("JSONObject @string rets",nameObj.getString("label")); //Works
 
              //Grab the label attribute that lives inside of im:name and store it
              application.setName(nameObj.getString("label"));
              application.setThumbnail(imageObj.getString("label"));
              application.setFavorite(false);
              application.setPrice(priceObj.getString("label"));
+             Log.d("Object",application.getName());
              appList.add(application);
              //Log.d("JSonObject Title",app.toString());
+            // Log.d("Size of applist ",appList.size() + "");
          }
          return  appList;
      }

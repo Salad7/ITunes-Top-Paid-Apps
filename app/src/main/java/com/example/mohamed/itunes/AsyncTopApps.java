@@ -3,6 +3,7 @@ package com.example.mohamed.itunes;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.os.AsyncTask;
+import android.util.Log;
 import android.widget.ProgressBar;
 
 import org.json.JSONException;
@@ -77,6 +78,8 @@ public class AsyncTopApps extends AsyncTask<String, Void, ArrayList<App>> {
     @Override
     protected void onPostExecute(ArrayList<App> apps) {
         super.onPostExecute(apps);
+        Log.d("Size of array list",apps.size()+"");
+        activity.sendData(apps);
     }
 
     @Override

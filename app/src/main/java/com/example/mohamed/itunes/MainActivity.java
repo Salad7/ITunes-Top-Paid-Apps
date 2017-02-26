@@ -28,7 +28,8 @@ public class MainActivity extends AppCompatActivity implements AsyncTopApps.IDat
     @Override
     public void sendData(ArrayList<App> a) {
         //Data will be sent here
-
+        AppAdapter adapter = new AppAdapter(this,R.layout.custom_list,a);
+        listView.setAdapter(adapter);
 
     }
 }
